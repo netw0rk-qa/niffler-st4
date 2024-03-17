@@ -5,6 +5,8 @@ import com.codeborne.selenide.Selenide;
 import guru.qa.niffler.jupiter.GenerateSpend;
 import guru.qa.niffler.model.CurrencyValues;
 import guru.qa.niffler.model.SpendJson;
+import guru.qa.niffler.test.pages.LoginPage;
+import guru.qa.niffler.test.pages.WelcomePage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +16,8 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 public class SpendingTest {
+  private final LoginPage loginPage = new LoginPage();
+  private final WelcomePage welcomePage = new WelcomePage();
 
   static {
     Configuration.browserSize = "1980x1024";
@@ -22,10 +26,8 @@ public class SpendingTest {
   @BeforeEach
   void doLogin() {
     Selenide.open("http://127.0.0.1:3000/main");
-    $("a[href*='redirect']").click();
-    $("input[name='username']").setValue("duck");
-    $("input[name='password']").setValue("12345");
-    $("button[type='submit']").click();
+    welcomePage.gotoLoginForm();
+    loginPage.fillAndSubmit("duck", "12345");
   }
 
   @GenerateSpend(
