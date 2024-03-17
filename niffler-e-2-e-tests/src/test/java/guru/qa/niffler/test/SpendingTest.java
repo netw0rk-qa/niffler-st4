@@ -2,12 +2,13 @@ package guru.qa.niffler.test;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import guru.qa.niffler.jupiter.GenerateCategory;
 import guru.qa.niffler.jupiter.GenerateSpend;
 import guru.qa.niffler.model.CurrencyValues;
 import guru.qa.niffler.model.SpendJson;
 import guru.qa.niffler.test.pages.LoginPage;
-import guru.qa.niffler.test.pages.WelcomePage;
 import guru.qa.niffler.test.pages.MainPage;
+import guru.qa.niffler.test.pages.WelcomePage;
 import guru.qa.niffler.test.pages.blocks.Columns;
 import guru.qa.niffler.test.pages.blocks.HistoryBlock;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +21,7 @@ public class SpendingTest {
 
   static {
     Configuration.browserSize = "1980x1024";
+    Configuration.browserVersion = "120.0";
   }
 
   @BeforeEach
@@ -29,6 +31,10 @@ public class SpendingTest {
     loginPage.fillAndSubmit("duck", "12345");
   }
 
+  @GenerateCategory(
+      username = "duck",
+      description = "Обучение"
+  )
   @GenerateSpend(
       username = "duck",
       description = "QA.GURU Advanced 4",
