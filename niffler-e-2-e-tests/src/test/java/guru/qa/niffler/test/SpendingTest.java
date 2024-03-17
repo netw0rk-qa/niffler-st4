@@ -7,17 +7,16 @@ import guru.qa.niffler.model.CurrencyValues;
 import guru.qa.niffler.model.SpendJson;
 import guru.qa.niffler.test.pages.LoginPage;
 import guru.qa.niffler.test.pages.WelcomePage;
+import guru.qa.niffler.test.pages.MainPage;
+import guru.qa.niffler.test.pages.blocks.Columns;
+import guru.qa.niffler.test.pages.blocks.HistoryBlock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static com.codeborne.selenide.CollectionCondition.size;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
 
 public class SpendingTest {
   private final LoginPage loginPage = new LoginPage();
   private final WelcomePage welcomePage = new WelcomePage();
+  private final HistoryBlock history = new MainPage().history;
 
   static {
     Configuration.browserSize = "1980x1024";
@@ -39,18 +38,8 @@ public class SpendingTest {
   )
   @Test
   void spendingShouldBeDeletedByButtonDeleteSpending(SpendJson spend) {
-    $(".spendings-table tbody")
-        .$$("tr")
-        .find(text(spend.description()))
-        .$$("td")
-        .first()
-        .click();
-
-    $(byText("Delete selected"))
-        .click();
-
-    $(".spendings-table tbody")
-        .$$("tr")
-        .shouldHave(size(0));
+    history.getCell(0, Columns.CHECKBOX).click();
+    history.deleteSelectedButton.click();
+    history.checkRowsSize(0);
   }
 }
