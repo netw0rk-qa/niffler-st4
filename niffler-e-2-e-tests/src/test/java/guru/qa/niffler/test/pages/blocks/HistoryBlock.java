@@ -1,10 +1,12 @@
 package guru.qa.niffler.test.pages.blocks;
 
-import com.codeborne.selenide.*;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.CollectionCondition.*;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.CollectionCondition.size;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 
 public class HistoryBlock {
     public final SelenideElement spendingTable = $(".spendings-table tbody");
@@ -23,6 +25,7 @@ public class HistoryBlock {
         return null;
     }
 
+    @Step("Check that spending was deleted")
     public void checkRowsSize(int expectedSize){
         rows.shouldHave(size(expectedSize));
     }

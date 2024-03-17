@@ -2,8 +2,8 @@ package guru.qa.niffler.test;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import guru.qa.niffler.jupiter.GenerateCategory;
 import guru.qa.niffler.jupiter.DisabledByIssue;
+import guru.qa.niffler.jupiter.GenerateCategory;
 import guru.qa.niffler.jupiter.GenerateSpend;
 import guru.qa.niffler.model.CurrencyValues;
 import guru.qa.niffler.model.SpendJson;
@@ -12,9 +12,10 @@ import guru.qa.niffler.test.pages.MainPage;
 import guru.qa.niffler.test.pages.WelcomePage;
 import guru.qa.niffler.test.pages.blocks.Columns;
 import guru.qa.niffler.test.pages.blocks.HistoryBlock;
-import io.qameta.allure.Allure;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static io.qameta.allure.Allure.step;
 
 public class SpendingTest extends BaseWebTest {
   private final LoginPage loginPage = new LoginPage();
@@ -48,7 +49,9 @@ public class SpendingTest extends BaseWebTest {
   @Test
   void spendingShouldBeDeletedByButtonDeleteSpending(SpendJson spend) {
     history.getCell(0, Columns.CHECKBOX).click();
-    history.deleteSelectedButton.click();
+    step("Delete spending", () -> {
+      history.deleteSelectedButton.click();
+    });
     history.checkRowsSize(0);
   }
 }
