@@ -25,11 +25,12 @@ public class HistoryBlock {
         return null;
     }
 
-    @Step("Check that spending was deleted")
+    @Step("Check that spending count is $expectedSize")
     public void checkRowsSize(int expectedSize){
         rows.shouldHave(size(expectedSize));
     }
 
+    @Step("Delete spending")
     public void clickOnDeleteButton() {
         deleteSelectedButton.click();
     }
