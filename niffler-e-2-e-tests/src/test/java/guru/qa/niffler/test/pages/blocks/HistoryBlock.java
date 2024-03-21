@@ -7,9 +7,9 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class HistoryBlock {
-    public final SelenideElement spendingTable = $(".spendings-table tbody");
-    public final SelenideElement deleteSelectedButton = $(byText("Delete selected"));
-    public final ElementsCollection rows = spendingTable.$$("tr");
+    private final SelenideElement spendingTable = $(".spendings-table tbody");
+    private final SelenideElement deleteSelectedButton = $(byText("Delete selected"));
+    private final ElementsCollection rows = spendingTable.$$("tr");
 
     public SelenideElement getCell(Integer nRow, Columns column){
         SelenideElement row = rows.get(nRow);
@@ -27,4 +27,7 @@ public class HistoryBlock {
         rows.shouldHave(size(expectedSize));
     }
 
+    public void clickOnDeleteButton() {
+        deleteSelectedButton.click();
+    }
 }

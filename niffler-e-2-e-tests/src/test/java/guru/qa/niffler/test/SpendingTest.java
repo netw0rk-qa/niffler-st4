@@ -45,7 +45,7 @@ public class SpendingTest {
   @Test
   void spendingShouldBeDeletedByButtonDeleteSpending(SpendJson spend) {
     history.getCell(0, Columns.CHECKBOX).click();
-    history.deleteSelectedButton.click();
+    history.clickOnDeleteButton();
     history.checkRowsSize(0);
   }
 }
