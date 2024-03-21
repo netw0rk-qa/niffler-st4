@@ -15,8 +15,6 @@ import guru.qa.niffler.test.pages.blocks.HistoryBlock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static io.qameta.allure.Allure.step;
-
 public class SpendingTest extends BaseWebTest {
   private final LoginPage loginPage = new LoginPage();
   private final WelcomePage welcomePage = new WelcomePage();
@@ -49,9 +47,7 @@ public class SpendingTest extends BaseWebTest {
   @Test
   void spendingShouldBeDeletedByButtonDeleteSpending(SpendJson spend) {
     history.getCell(0, Columns.CHECKBOX).click();
-    step("Delete spending", () -> {
-      history.deleteSelectedButton.click();
-    });
+    history.clickOnDeleteButton();
     history.checkRowsSize(0);
   }
 }
